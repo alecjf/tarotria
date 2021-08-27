@@ -1,0 +1,53 @@
+.find-word h3 {
+  margin-top: 0;
+}
+
+.find-word #results {
+  margin-top: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.find-word #results #card-words,
+.find-word #results #hebrew {
+  width: 100%;
+  max-width: 700px;
+}
+
+.find-word #results #card-words,
+.find-word #results #hebrew > div {
+  min-width: 300px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 20px 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.find-word #results #hebrew {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 20px;
+}
+/*# sourceMappingURL=find-word.css.map */

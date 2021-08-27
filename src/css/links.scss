@@ -1,0 +1,27 @@
+.card-word-link,
+.hebrew-word,
+.number,
+.card-name-link {
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.card-word-link,
+.hebrew-word,
+.number {
+	color: rebeccapurple;
+}
+
+.card-name-link {
+	color: navy;
+}
+
+.hebrew-word {
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.number {
+	text-decoration: underline;
+}
