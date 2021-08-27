@@ -19,7 +19,9 @@ function FindWord({
 	}, [cardWord]);
 
 	const findWordHandler = () => {
-		const val = removeRLM(document.getElementById("word").value).trim();
+		const val = removeRLM(document.getElementById("word").value)
+			.trim()
+			.toLowerCase();
 		if (val.length >= 2) {
 			setCardWord(val);
 			setWords(getAllMatchingWords(val));
