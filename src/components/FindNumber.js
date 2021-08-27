@@ -8,7 +8,7 @@ function FindNumber({ numbers, setNumbers, makeHebrewWordBoxes }) {
 	};
 
 	useEffect(
-		() => (document.getElementById("number").value = numbers[0]),
+		() => numbers && (document.getElementById("number").value = numbers[0]),
 		[numbers]
 	);
 
