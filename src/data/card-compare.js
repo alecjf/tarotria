@@ -143,7 +143,11 @@ const mostCardsSorter = (a, b) => {
 		bCards = b.get("friendlyCards"),
 		aOppos = a.get("enemyCards"),
 		bOppos = b.get("enemyCards");
-	return bCards.length - aCards.length || bOppos.length - aOppos.length;
+	return (
+		bCards.length - aCards.length ||
+		bOppos.length - aOppos.length ||
+		allCardNames.indexOf(aCards[0]) - allCardNames.indexOf(bCards[0])
+	);
 };
 
 export default getSpreadMaps;

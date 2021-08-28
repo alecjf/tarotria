@@ -1,6 +1,6 @@
 import "./App.css";
-import { useState } from "react";
-import { getRandomSpread } from "./data/cards.js";
+import { useEffect, useState } from "react";
+import { allCardNames, getRandomSpread } from "./data/cards.js";
 import hebrewWords from "./data/gematria";
 import CardCompare from "./components/CardCompare";
 import FindWord from "./components/FindWord";
@@ -11,10 +11,33 @@ import FindNumber from "./components/FindNumber";
 import CardNameLinks from "./components/CardNameLinks";
 
 function App() {
-	const [spread, setSpread] = useState(getRandomSpread(1)),
+	const [size, setSize] = useState(3),
+		[spread, setSpread] = useState(getRandomSpread(size)),
 		[cardWord, setCardWord] = useState(undefined),
 		[words, setWords] = useState(undefined),
 		[numbers, setNumbers] = useState(undefined);
+
+	useEffect(() => setSpread(getRandomSpread(size)), [size]);
+
+	const sizeDropdownHandler = (e) => setSize(e.target.value);
+
+	const getSizeDropdown = (size) => (
+		<select id="size" onChange={(е) => sizeDropdownHandler(е)}>
+			{new Array(size).fill(0).map((dummy, i) => (
+				<option key={`size-option-${i + 1}`}>{i + 1}</option>
+			))}
+		</select>
+	);
+
+	const cardsDropdownHandler = (e) => setSpread([e.target.value]);
+
+	const getCardsDropdown = () => (
+		<select id="cards" onChange={(е) => cardsDropdownHandler(е)}>
+			{allCardNames.map((cardName) => (
+				<option key={`cards-option-${cardName}`}>{cardName}</option>
+			))}
+		</select>
+	);
 
 	const makeCardWordLink = (word) => (
 		<CardWordLink {...{ word, setCardWord, setWords }} />
@@ -48,7 +71,9 @@ function App() {
 	return (
 		<div className="App">
 			<h1>Tarotria</h1>
+			Spread Size: {getSizeDropdown(10)}
 			<h3>{spread.join(", ")}</h3>
+			Cards: {getCardsDropdown()}
 			{makeCardCompare({ spread })}
 			<hr />
 			<FindWord
