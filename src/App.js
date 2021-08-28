@@ -1,4 +1,5 @@
 import "./App.css";
+import "./css/links.css";
 import { useEffect, useState } from "react";
 import { allCardNames, getRandomSpread } from "./data/cards.js";
 import hebrewWords from "./data/gematria";
@@ -17,7 +18,15 @@ function App() {
 		[words, setWords] = useState(undefined),
 		[numbers, setNumbers] = useState(undefined);
 
-	useEffect(() => setSpread(getRandomSpread(size)), [size]);
+	useEffect(() => {
+		setSpread(getRandomSpread(size));
+		document.getElementById("size").value = size;
+	}, [size]);
+
+	useEffect(
+		() => (document.getElementById("cards").value = spread[0]),
+		[spread]
+	);
 
 	const sizeDropdownHandler = (e) => setSize(e.target.value);
 
@@ -72,7 +81,18 @@ function App() {
 		<div className="App">
 			<h1>Tarotria</h1>
 			Spread Size: {getSizeDropdown(10)}
-			<h3>{spread.join(", ")}</h3>
+			<h3>
+				<ul id="spread-cards">
+					{spread.map((card) => (
+						<li
+							key={`spread-card-${card}`}
+							onClick={() => setSpread([card])}
+						>
+							{card}
+						</li>
+					))}
+				</ul>
+			</h3>
 			Cards: {getCardsDropdown()}
 			{makeCardCompare({ spread })}
 			<hr />

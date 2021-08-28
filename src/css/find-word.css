@@ -20,7 +20,6 @@
 .find-word #results #card-words,
 .find-word #results #hebrew {
   width: 100%;
-  max-width: 700px;
 }
 
 .find-word #results #card-words,
