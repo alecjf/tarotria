@@ -18,17 +18,17 @@ function App() {
 		[words, setWords] = useState(undefined),
 		[numbers, setNumbers] = useState(undefined);
 
-	useEffect(() => {
-		setSpread(getRandomSpread(size));
-		document.getElementById("size").value = size;
-	}, [size]);
+	useEffect(() => (document.getElementById("size").value = size), [size]);
 
 	useEffect(
 		() => (document.getElementById("cards").value = spread[0]),
 		[spread]
 	);
 
-	const sizeDropdownHandler = (e) => setSize(e.target.value);
+	const sizeDropdownHandler = (e) => {
+		setSize(e.target.value);
+		setSpread(getRandomSpread(e.target.value));
+	};
 
 	const getSizeDropdown = (size) => (
 		<select id="size" onChange={(е) => sizeDropdownHandler(е)}>
@@ -48,12 +48,22 @@ function App() {
 		</select>
 	);
 
+	const cardWordLinkHandler = (word) => {
+		setCardWord(word);
+		setWords([word]);
+	};
+
 	const makeCardWordLink = (word) => (
-		<CardWordLink {...{ word, setCardWord, setWords }} />
+		<CardWordLink {...{ word, cardWordLinkHandler }} />
 	);
 
+	const cardNameLinkHandler = (cardName) => {
+		setSize(1);
+		setSpread([cardName]);
+	};
+
 	const makeCardNameLinks = (cardNames) => (
-		<CardNameLinks {...{ cardNames, setSpread }} />
+		<CardNameLinks {...{ cardNames, cardNameLinkHandler }} />
 	);
 
 	const makeCardCompare = ({ spread, cardWord }) => (
@@ -86,7 +96,8 @@ function App() {
 					{spread.map((card) => (
 						<li
 							key={`spread-card-${card}`}
-							onClick={() => setSpread([card])}
+							className="card-name-link"
+							onClick={() => cardNameLinkHandler(card)}
 						>
 							{card}
 						</li>

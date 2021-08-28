@@ -1,12 +1,12 @@
 import "../css/links.css";
 import React from "react";
 
-function CardNameLinks({ cardNames, setSpread }) {
+function CardNameLinks({ cardNames, cardNameLinkHandler }) {
 	return cardNames.map((cardName, i, a) => (
 		<React.Fragment key={`${cardNames}-${cardName}`}>
 			<span
 				className="card-name-link"
-				onClick={() => setSpread([cardName])}
+				onClick={() => cardNameLinkHandler(cardName)}
 			>
 				{cardName}
 			</span>
