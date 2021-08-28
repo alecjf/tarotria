@@ -22,7 +22,7 @@ function CardCompare({
 	return spreadMaps.length > 0 ? (
 		<div className="card-compare">
 			{spreadMaps
-				.sort(mostCardsSorter)
+				.sort((a, b) => mostCardsSorter(a, b, spread))
 				.map((map, i) => {
 					const friendlyCards = map.get("friendlyCards"),
 						enemyCards = map.get("enemyCards"),

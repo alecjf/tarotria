@@ -138,7 +138,7 @@ const getCardWordMaps = (cardWord) =>
 		cardWord
 	);
 
-const mostCardsSorter = (a, b) => {
+const mostCardsSorter = (a, b, spread) => {
 	const aCards = a.get("friendlyCards"),
 		bCards = b.get("friendlyCards"),
 		aOppos = a.get("enemyCards"),
@@ -146,6 +146,7 @@ const mostCardsSorter = (a, b) => {
 	return (
 		bCards.length - aCards.length ||
 		bOppos.length - aOppos.length ||
+		(spread && spread.indexOf(aCards[0]) - spread.indexOf(bCards[0])) ||
 		allCardNames.indexOf(aCards[0]) - allCardNames.indexOf(bCards[0])
 	);
 };
