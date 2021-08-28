@@ -48,13 +48,13 @@ function App() {
 		</select>
 	);
 
-	const cardWordLinkHandler = (word) => {
-		setCardWord(word);
-		setWords([word]);
+	const cardWordLinkHandler = (cardWord) => {
+		setCardWord(cardWord);
+		setWords([cardWord]);
 	};
 
-	const makeCardWordLink = (word) => (
-		<CardWordLink {...{ word, cardWordLinkHandler }} />
+	const makeCardWordLink = (cardWord) => (
+		<CardWordLink {...{ cardWord, cardWordLinkHandler }} />
 	);
 
 	const cardNameLinkHandler = (cardName) => {
@@ -76,12 +76,12 @@ function App() {
 		<LinkedLine {...{ line, setCardWord, setWords, setNumbers }} />
 	);
 
-	const makeHebrewWordBoxes = (arr) => {
-		const result = arr
+	const makeHebrewWordBoxes = (words) => {
+		const result = words
 			?.filter((word) => hebrewWords[word])
 			.map((word) => (
 				<HebrewWordBox
-					{...{ word, makeLinkedLine, key: `${arr}-${word}` }}
+					{...{ word, makeLinkedLine, key: `${words}-${word}` }}
 				/>
 			));
 		return result?.length > 0 ? result : null;

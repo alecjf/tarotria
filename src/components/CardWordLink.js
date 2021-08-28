@@ -1,14 +1,14 @@
 import "../css/links.css";
 import React from "react";
 
-function CardWordLink({ word, cardWordLinkHandler }) {
-	return word.split(", ").map((w, i, a) => (
-		<React.Fragment key={w}>
+function CardWordLink({ cardWord, cardWordLinkHandler }) {
+	return cardWord.split(", ").map((word, i, a) => (
+		<React.Fragment key={word}>
 			<span
 				className="card-word-link"
-				onClick={() => cardWordLinkHandler(w)}
+				onClick={() => cardWordLinkHandler(word)}
 			>
-				{w}
+				{word}
 			</span>
 			{i !== a.length - 1 && <>, </>}
 		</React.Fragment>

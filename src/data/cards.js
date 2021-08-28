@@ -9,7 +9,7 @@ const opposites = [
 	["beginning", "ending"],
 	["bravery", "fear"],
 	["chaos", "serenity"],
-	["cold", "warmth"],
+	["cold", "warm"],
 	["conscious mind", "unconscious mind"],
 	["control", "loss of control"],
 	["decision", "indecision"],
@@ -379,7 +379,7 @@ const cards = {
 			"joy",
 			"success",
 			"vitality",
-			"warmth",
+			"warm",
 		],
 	},
 	Judgement: {
@@ -1290,7 +1290,7 @@ const cards = {
 			"seduction",
 			"sensitivity",
 			"temperamental",
-			"warmth",
+			"warm",
 		],
 	},
 	"Queen of Cups": {
@@ -1320,7 +1320,7 @@ const cards = {
 			"sympathy",
 			"tranquility",
 			"understanding",
-			"warmth",
+			"warm",
 		],
 	},
 	"King of Cups": {
@@ -1657,9 +1657,7 @@ const REVERSED = " reversed";
 
 const isReversed = (card) => card.includes(REVERSED),
 	trimReversed = (card) =>
-		isReversed(card) ? card.substring(0, card.indexOf(REVERSED)) : card,
-	flipCard = (card) =>
-		isReversed(card) ? trimReversed(card) : card + REVERSED;
+		isReversed(card) ? card.substring(0, card.indexOf(REVERSED)) : card;
 
 const getOppositeWords = (word) => {
 	const result = opposites
