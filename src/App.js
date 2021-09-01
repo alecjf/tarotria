@@ -2,8 +2,7 @@ import "./App.css";
 import "./css/links.css";
 import { useEffect, useState, useRef } from "react";
 import { allCardNames, getRandomSpread } from "./data/cards.js";
-import { allHebrewWords } from "./data/gematria";
-import hebrewWords from "./data/gematria";
+import hebrewWords, { allHebrewWords } from "./data/gematria";
 import CardCompare from "./components/CardCompare";
 import FindWord from "./components/FindWord";
 import CardWordLink from "./components/CardWordLink";
@@ -11,7 +10,8 @@ import HebrewWordBox from "./components/HebrewWordBox";
 import LinkedLine from "./components/LinkedLine";
 import FindNumber from "./components/FindNumber";
 import CardNameLinks from "./components/CardNameLinks";
-import Rebuild, { showGuts } from "./components/Rebuild";
+// import Rebuild, { showGuts, getFirstDef, key2 } from "./components/Rebuild";
+// import { hebrewWordRegExp } from "./data/gematria";
 
 function App() {
 	const [size, setSize] = useState(3),
@@ -149,11 +149,24 @@ const getAllMatchingWords = (word) =>
 			hebrew.includes(word) || hebrewWords[hebrew].final?.includes(word)
 	);
 
+/*
 const key1 = Object.keys(hebrewWords)[0],
-	key2 = "חנ",
-	key3 = "כי-עגבימ בפיהמ המה עשימ";
+	longKey = "כי-עגבימ בפיהמ המה עשימ",
+	allHebrewWordsWithHebrewDefs = allHebrewWords.filter(
+		(word) =>
+			hebrewWords[word].definitions.filter((def) =>
+				def.match(hebrewWordRegExp)
+			).length
+	),
+	getRandomHebrewWord = () =>
+		allHebrewWordsWithHebrewDefs[
+			Math.floor(Math.random() * allHebrewWordsWithHebrewDefs.length)
+		];
 
-console.log(showGuts(key3));
+hebrewWords[getRandomHebrewWord()].definitions.forEach((def) =>
+	console.log(showGuts(def))
+);
+*/
 
 export default App;
 export { getAllMatchingWords };

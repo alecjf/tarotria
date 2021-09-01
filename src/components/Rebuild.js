@@ -1,4 +1,4 @@
-import hebrewWords, { values } from "../data/gematria";
+import hebrewWords /*, { values }*/ from "../data/gematria";
 
 function Rebuild() {
 	const hebrewWordRegExp = new RegExp(
@@ -50,17 +50,14 @@ function Rebuild() {
 		result[noDir(word)] = add;
 	});
 
-	const vals = { ...values };
-
-	const key1 = Object.keys(result)[0],
-		key2 = "חנ",
-		def =
-			"‎‎‎‎‎‎‎‎‎‎‎‎‎‎Aleph. (In spelling, interchanges with:‎‏ה ‏‎,‎‏ו ‏‎,‎‏י ‏‎,‎‏ז ‏‎;‎‏ט ‏‎,‎‏ח ‏‎,‎‏ע ‏‎,‎‏כ ‏‎,‎‏ס ‏‎,‎‏צ ‏‎,‎‏ק ‏‎,‎‏ת ‏‎) (Aleph =‎‏ אלף ‏‎— 111/831;‎‏ אלוף ‏‎— 117/837 — Ox) (The value of 111 is significant in QBL tradition).‎‎‎‎‎‎‎‎‎‎‎‎‎‎",
-		getFirstDef = (key) => result[key].definitions[0];
-
-	// console.log(getFirstDef(key2), showGuts(getFirstDef(key2)));
-
 	/*
+    const key1 = Object.keys(result)[0],
+	def =
+		"‎‎‎‎‎‎‎‎‎‎‎‎‎‎Aleph. (In spelling, interchanges with:‎‏ה ‏‎,‎‏ו ‏‎,‎‏י ‏‎,‎‏ז ‏‎;‎‏ט ‏‎,‎‏ח ‏‎,‎‏ע ‏‎,‎‏כ ‏‎,‎‏ס ‏‎,‎‏צ ‏‎,‎‏ק ‏‎,‎‏ת ‏‎) (Aleph =‎‏ אלף ‏‎— 111/831;‎‏ אלוף ‏‎— 117/837 — Ox) (The value of 111 is significant in QBL tradition).‎‎‎‎‎‎‎‎‎‎‎‎‎‎";
+
+	console.log(getFirstDef(key2), showGuts(getFirstDef(result, key2)));
+
+    const vals = { ...values };
 	Object.keys(vals).forEach((key) =>
 		vals[key].words
 			? (vals[key].words = vals[key].words.map((word) => noDir(word)))
@@ -78,10 +75,12 @@ function Rebuild() {
 }
 
 const showGuts = (line) =>
-	[...line].map((char) => {
-		const code = char.charCodeAt(0);
-		return code === 8206 || code === 8207 ? code : char;
-	});
+		[...line].map((char) => {
+			const code = char.charCodeAt(0);
+			return code === 8206 || code === 8207 ? code : char;
+		}),
+	getFirstDef = (obj, key) => obj[key].definitions[0],
+	key2 = "חנ";
 
 export default Rebuild;
-export { showGuts };
+export { showGuts, getFirstDef, key2 };
