@@ -1,9 +1,8 @@
 import "../css/links.css";
 import React from "react";
 import { hebrewWordRegExp, negativeHebrewWordRegExp } from "../data/gematria";
-import { getAllMatchingWords } from "./FindWord";
 
-function LinkedLine({ line, setCardWord, setWords, setNumbers }) {
+function LinkedLine({ line, cardWordLinkHandler, numberLinkHandler }) {
 	const highlightLineHelper = (
 		line,
 		posRegExp,
@@ -14,31 +13,26 @@ function LinkedLine({ line, setCardWord, setWords, setNumbers }) {
 		!isNaN(line) && (line += "");
 		const initialMatches = line.match(posRegExp);
 		if (!initialMatches) return [line];
-		const matches = initialMatches.map((match, i) => (
-			<React.Fragment key={`${match}-${i}`}>
-				<span className={className} onClick={() => handler(match)}>
+		const matches = initialMatches.map((match, i) =>
+			match === "-" ? (
+				match
+			) : (
+				<span
+					key={`${match}-${i}`}
+					className={className}
+					onClick={() => handler(match)}
+				>
 					{match}
 				</span>
-			</React.Fragment>
-		));
+			)
+		);
 		const notMatches = line.match(negRegExp) || [];
 		let even = line.indexOf(initialMatches[0]) === 0 ? matches : notMatches,
 			odd = even === matches ? notMatches : matches;
-		even = even.filter((e) => e !== " ");
-		odd = odd.filter((o) => o !== " ");
-		return even.map((e, i) => (
-			<React.Fragment key={`${e}-${i}`}>
-				{[removeRLM(e), removeRLM(odd[i])]}
-			</React.Fragment>
-		));
+		// even = even.filter((e) => e !== " ");
+		// odd = odd.filter((o) => o !== " ");
+		return even.map((e, i) => [e, odd[i]]).flat();
 	};
-
-	const hebrewWordLinkHandler = (word) => {
-			const updated = removeRLM(word).trim();
-			setCardWord(updated);
-			setWords(getAllMatchingWords(updated));
-		},
-		numberLinkHandler = (number) => setNumbers([+number]);
 
 	const highlightNumbersInLine = (line) =>
 		highlightLineHelper(
@@ -55,7 +49,7 @@ function LinkedLine({ line, setCardWord, setWords, setNumbers }) {
 			hebrewWordRegExp,
 			negativeHebrewWordRegExp,
 			"hebrew-word",
-			hebrewWordLinkHandler
+			cardWordLinkHandler
 		);
 
 	const highlightAll = (line) =>
@@ -70,10 +64,4 @@ function LinkedLine({ line, setCardWord, setWords, setNumbers }) {
 	return highlightAll(line);
 }
 
-const rlm = String.fromCharCode(8207);
-
-const removeRLM = (word) =>
-	typeof word === "string" ? word.replace(new RegExp(rlm, "g"), "") : word;
-
 export default LinkedLine;
-export { rlm, removeRLM };

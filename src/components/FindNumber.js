@@ -15,13 +15,13 @@ function FindNumber({ numbers, setNumbers, makeHebrewWordBoxes }) {
 	return (
 		<div id="find-number">
 			<h2>Find Numbers</h2>
-			<input id="number" type="number" />
-			<button onClick={findNumberHandler}>FIND NUMBER</button>
-			<br />
-			<br />
-			{numbers ? (
+			<form onSubmit={(e) => e.preventDefault()}>
+				<input id="number" type="number" />
+				<button onClick={findNumberHandler}>FIND NUMBER</button>
+			</form>
+			{numbers.filter((number) => values[number]).length > 0 ? (
 				<>
-					<h4>{numbers.join(", ")}</h4>
+					<h3>{numbers.join(", ")}</h3>
 					{numbers
 						.filter((number) => values[number])
 						.map((number) =>
@@ -33,7 +33,10 @@ function FindNumber({ numbers, setNumbers, makeHebrewWordBoxes }) {
 						)}
 				</>
 			) : (
-				<>NO MATCHING NUMBERS</>
+				<>
+					<br />
+					NO MATCHING NUMBERS
+				</>
 			)}
 		</div>
 	);

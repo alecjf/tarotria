@@ -1,13 +1,11 @@
 import "../css/find-word.css";
 import { useEffect, useState } from "react";
 import hebrewWords, { allHebrewWords } from "../data/gematria";
-import { removeRLM } from "./LinkedLine";
 
 function FindWord({
 	words,
-	setWords,
 	cardWord,
-	setCardWord,
+	cardWordLinkHandler,
 	makeCardCompare,
 	makeHebrewWordBoxes,
 }) {
@@ -18,21 +16,21 @@ function FindWord({
 		cardWord && (document.getElementById("word").value = cardWord);
 	}, [cardWord]);
 
-	const findWordHandler = () => {
-		const val = removeRLM(document.getElementById("word").value)
-			.trim()
-			.toLowerCase();
-		if (val.length >= 2) {
-			setCardWord(val);
-			setWords(getAllMatchingWords(val));
-		}
-	};
-
 	return (
 		<div className="find-word">
 			<h2>Find Word</h2>
-			<input id="word" type="text" />
-			<button onClick={findWordHandler}>FIND WORD</button>
+			<form onSubmit={(e) => e.preventDefault()}>
+				<input id="word" type="text" />
+				<button
+					onClick={() =>
+						cardWordLinkHandler(
+							document.getElementById("word").value
+						)
+					}
+				>
+					FIND WORD
+				</button>
+			</form>
 			<div id="results">
 				<div id="card-words">
 					<h3>Matching Card Words</h3>
@@ -55,19 +53,13 @@ function FindWord({
 	);
 }
 
-const getAllMatchingWords = (word) =>
-	allHebrewWords.filter(
-		(hebrew) =>
-			hebrew.includes(word) || hebrewWords[hebrew].final?.includes(word)
-	);
-
 const getAllMatchingDefinitions = (word) =>
 	allHebrewWords.filter(
 		(hebrew) =>
 			hebrewWords[hebrew].definitions.filter((definition) =>
-				definition.includes(word)
+				definition.toLowerCase().includes(word)
 			).length > 0
 	);
 
 export default FindWord;
-export { getAllMatchingWords, getAllMatchingDefinitions };
+export { getAllMatchingDefinitions };

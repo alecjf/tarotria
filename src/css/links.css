@@ -2,6 +2,7 @@
 .hebrew-word:hover,
 .number:hover,
 .card-name-link:hover {
+  color: cadetblue;
   cursor: pointer;
 }
 
