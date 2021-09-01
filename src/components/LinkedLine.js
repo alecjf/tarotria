@@ -14,16 +14,16 @@ function LinkedLine({ line, cardWordLinkHandler, numberLinkHandler }) {
 		const initialMatches = line.match(posRegExp);
 		if (!initialMatches) return [line];
 		const matches = initialMatches.map((match, i) => (
-			<span
-				key={`${match}-${i}`}
-				className={className}
-				onClick={() => handler(match)}
-			>
-				{match}
-			</span>
-		));
-		const notMatches = line.match(negRegExp) || [];
-		let even = line.indexOf(initialMatches[0]) === 0 ? matches : notMatches,
+				<span
+					key={`${match}-${i}`}
+					className={className}
+					onClick={() => handler(match)}
+				>
+					{match}
+				</span>
+			)),
+			notMatches = line.match(negRegExp) || [],
+			even = line.indexOf(initialMatches[0]) === 0 ? matches : notMatches,
 			odd = even === matches ? notMatches : matches;
 		return even.map((e, i) => [e, odd[i]]).flat();
 	};
