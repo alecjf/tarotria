@@ -13,24 +13,18 @@ function LinkedLine({ line, cardWordLinkHandler, numberLinkHandler }) {
 		!isNaN(line) && (line += "");
 		const initialMatches = line.match(posRegExp);
 		if (!initialMatches) return [line];
-		const matches = initialMatches.map((match, i) =>
-			match === "-" ? (
-				match
-			) : (
-				<span
-					key={`${match}-${i}`}
-					className={className}
-					onClick={() => handler(match)}
-				>
-					{match}
-				</span>
-			)
-		);
+		const matches = initialMatches.map((match, i) => (
+			<span
+				key={`${match}-${i}`}
+				className={className}
+				onClick={() => handler(match)}
+			>
+				{match}
+			</span>
+		));
 		const notMatches = line.match(negRegExp) || [];
 		let even = line.indexOf(initialMatches[0]) === 0 ? matches : notMatches,
 			odd = even === matches ? notMatches : matches;
-		// even = even.filter((e) => e !== " ");
-		// odd = odd.filter((o) => o !== " ");
 		return even.map((e, i) => [e, odd[i]]).flat();
 	};
 
