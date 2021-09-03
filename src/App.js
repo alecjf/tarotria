@@ -10,8 +10,6 @@ import HebrewWordBox from "./components/HebrewWordBox";
 import LinkedLine from "./components/LinkedLine";
 import FindNumber from "./components/FindNumber";
 import CardNameLinks from "./components/CardNameLinks";
-// import Rebuild, { showGuts, getFirstDef, key2 } from "./components/Rebuild";
-// import { hebrewWordRegExp } from "./data/gematria";
 
 function App() {
 	const [size, setSize] = useState(3),
@@ -138,7 +136,6 @@ function App() {
 			<div id="find-number-container">
 				<FindNumber {...{ numbers, setNumbers, makeHebrewWordBoxes }} />
 			</div>
-			{/*<Rebuild />*/}
 		</div>
 	);
 }
@@ -148,25 +145,6 @@ const getAllMatchingWords = (word) =>
 		(hebrew) =>
 			hebrew.includes(word) || hebrewWords[hebrew].final?.includes(word)
 	);
-
-/*
-const key1 = Object.keys(hebrewWords)[0],
-	longKey = "כי-עגבימ בפיהמ המה עשימ",
-	allHebrewWordsWithHebrewDefs = allHebrewWords.filter(
-		(word) =>
-			hebrewWords[word].definitions.filter((def) =>
-				def.match(hebrewWordRegExp)
-			).length
-	),
-	getRandomHebrewWord = () =>
-		allHebrewWordsWithHebrewDefs[
-			Math.floor(Math.random() * allHebrewWordsWithHebrewDefs.length)
-		];
-
-hebrewWords[getRandomHebrewWord()].definitions.forEach((def) =>
-	console.log(showGuts(def))
-);
-*/
 
 export default App;
 export { getAllMatchingWords };
