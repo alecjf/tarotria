@@ -8,7 +8,8 @@ function LinkedLine({ line, cardWordLinkHandler, numberLinkHandler }) {
 		posRegExp,
 		negRegExp,
 		className,
-		handler
+		handler,
+		isHebrew
 	) => {
 		!isNaN(line) && (line += "");
 		const initialMatches = line.match(posRegExp);
@@ -22,7 +23,11 @@ function LinkedLine({ line, cardWordLinkHandler, numberLinkHandler }) {
 					{match}
 				</span>
 			)),
-			notMatches = line.match(negRegExp) || [],
+			notMatches =
+				line
+					.match(negRegExp)
+					?.map((match) => (isHebrew ? match.trim() : match)) ||
+				[],
 			even = line.indexOf(initialMatches[0]) === 0 ? matches : notMatches,
 			odd = even === matches ? notMatches : matches;
 		return even.map((e, i) => [e, odd[i]]).flat();
@@ -43,7 +48,8 @@ function LinkedLine({ line, cardWordLinkHandler, numberLinkHandler }) {
 			hebrewWordRegExp,
 			negativeHebrewWordRegExp,
 			"hebrew-word",
-			cardWordLinkHandler
+			cardWordLinkHandler,
+			true
 		);
 
 	const highlightAll = (line) =>

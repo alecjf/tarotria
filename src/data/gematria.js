@@ -33771,7 +33771,10 @@ const hebrewWords = {
 	ידוע: { definitions: ['‎pr.n. "Much Known" or "Knowing"‎'], value: 90 },
 };
 
-const hebrewWordRegExp = new RegExp(/[\u0590-\u05FF\uFB1D-\uFB4F]+/, "g");
+const hebrewWordRegExp = new RegExp(
+	/[\s]*[\u0590-\u05FF\uFB1D-\uFB4F]+[\s]*/,
+	"g"
+);
 
 const negativeHebrewWordRegExp = new RegExp(
 	/[^\u0590-\u05FF\uFB1D-\uFB4F]+/,
