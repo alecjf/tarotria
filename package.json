@@ -1,6 +1,6 @@
 {
-	"name": "new-tarotria",
-	"homepage": "https://fern.haus/new-tarotria",
+	"name": "tarotria",
+	"homepage": "https://fern.haus/projects/tarotria",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
