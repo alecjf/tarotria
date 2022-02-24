@@ -17,6 +17,7 @@ function FindNumber({ numbers, setNumbers, makeHebrewWordBoxes }) {
 			<h2>Find Numbers</h2>
 			<form onSubmit={(e) => e.preventDefault()}>
 				<input id="number" type="number" />
+				&nbsp;
 				<button onClick={findNumberHandler}>FIND NUMBER</button>
 			</form>
 			{numbers.filter((number) => values[number]).length > 0 ? (

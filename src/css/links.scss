@@ -1,29 +1,26 @@
+a,
 .card-word-link,
 .hebrew-word,
-.number,
-.card-name-link {
+.number {
+	color: #add8e6;
+	font-weight: 600;
+
 	&:hover {
-		color: cadetblue;
+		color: white !important;
 		cursor: pointer;
 	}
 }
 
-.card-word-link,
-.hebrew-word,
-.number {
-	color: rebeccapurple;
-}
+.card-name-link {
+	color: white;
+	font-weight: 600;
 
-.card-name-link,
-#spread-cards li {
-	color: navy;
+	&:hover {
+		color: #add8e6;
+		cursor: pointer;
+	}
 }
 
 .hebrew-word {
-	font-weight: bold;
 	white-space: nowrap;
-}
-
-.number {
-	text-decoration: underline;
 }
