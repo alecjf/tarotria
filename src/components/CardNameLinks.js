@@ -10,7 +10,7 @@ function CardNameLinks({ cardNames, cardNameLinkHandler }) {
 			>
 				{cardName}
 			</span>
-			{i !== a.length - 1 && <>, </>}
+			{i !== a.length - 1 && <span className="comma">,&nbsp;</span>}
 		</React.Fragment>
 	));
 }

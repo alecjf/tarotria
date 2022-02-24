@@ -1,7 +1,150 @@
+body {
+  background-color: #aaa;
+  color: #333;
+}
+
+body .App > *:not(header):not(footer) {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body .App footer {
+  margin-top: 100px;
+}
+
+.comma {
+  color: #888;
+  padding-right: 3px;
+}
+
+input,
+select {
+  height: 30px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #333;
+  font-family: Inter, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+button {
+  min-height: 30px;
+  background-color: #add8e6;
+  color: #333;
+  border: 0;
+  border-radius: 5px;
+  font-weight: 600;
+  padding: 5px 7px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.fern-haus-link {
+  text-decoration: none;
+}
+
+.fern-haus-link:hover .fern-haus-info {
+  background-color: #333;
+}
+
+.fern-haus-link:hover .fern-haus-info img {
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  -webkit-filter: invert(100%);
+          filter: invert(100%);
+}
+
+.fern-haus-link:hover .fern-haus-info h4 {
+  color: #ccc;
+}
+
+.fern-haus-link .fern-haus-info {
+  padding: 20px;
+  background-color: cadetblue;
+  color: white;
+}
+
+.fern-haus-link .fern-haus-info img {
+  height: 80px;
+  width: auto;
+}
+
+.fern-haus-link .fern-haus-info h4 {
+  margin: 0 auto;
+}
+
+header {
+  background-color: white;
+}
+
+header .fern-haus-info {
+  margin-bottom: 20px;
+}
+
+header h1,
+header h2 {
+  margin: 0 auto;
+}
+
+header h1 {
+  color: cadetblue;
+  font-size: 4rem;
+  letter-spacing: 0.175rem;
+  text-transform: uppercase;
+}
+
+header h2 {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+header #sub-header {
+  background-color: #333;
+  color: white;
+  margin-bottom: 40px;
+  padding: 20px;
+}
+
+header #sub-header > * {
+  max-width: 700px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header #sub-header h3 {
+  font-weight: normal;
+}
+
+header #sub-header p {
+  color: #ccc;
+  font-style: italic;
+}
+
+header #sub-header p a {
+  font-weight: bold;
+}
+
+.find-word {
+  color: #333;
+}
+
+.find-word #results #card-words,
+.find-word #results #hebrew > div {
+  background-color: #ccc;
+}
+
 table {
   width: 100%;
   max-width: 450px;
-  background-color: #eee;
+  background-color: #333;
+  color: #eee;
   margin: 20px auto;
   border-collapse: collapse;
 }
@@ -14,14 +157,15 @@ table tr {
 
 table tr th,
 table tr td {
-  border: 1px solid black;
+  border: 1px solid #666;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  padding: 5px;
 }
 
 table tr th {
-  background-color: #9a9;
+  background-color: #555;
 }
 
 table tr th:nth-child(odd) {
@@ -33,9 +177,7 @@ table tr th .hebrew-word {
 }
 
 .App {
-  max-width: 700px;
   text-align: center;
-  margin: 0 auto 50px;
 }
 
 .App hr {
@@ -43,12 +185,47 @@ table tr th .hebrew-word {
 }
 
 .App #spread-cards {
-  width: 250px;
-  background-color: lavender;
+  background-color: #555;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 10px;
   margin: auto;
-  padding: 20px 20px 20px 50px;
+  padding: 20px;
   border-radius: 20px;
   text-align: left;
+}
+
+.App #spread-cards .card-name-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+.App #spread-cards .card-name-link img {
+  height: auto;
+  width: 120px;
+}
+
+.App #spread-cards .card-name-link img.reversed {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 
 .App-logo {

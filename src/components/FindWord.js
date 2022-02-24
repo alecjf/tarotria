@@ -21,6 +21,7 @@ function FindWord({
 			<h2>Find Word</h2>
 			<form onSubmit={(e) => e.preventDefault()}>
 				<input id="word" type="text" />
+				&nbsp;
 				<button
 					onClick={() =>
 						cardWordLinkHandler(

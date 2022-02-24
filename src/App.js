@@ -1,3 +1,4 @@
+import "./css/variables.css";
 import "./App.css";
 import "./css/links.css";
 import { useEffect, useState, useRef } from "react";
@@ -10,6 +11,7 @@ import HebrewWordBox from "./components/HebrewWordBox";
 import LinkedLine from "./components/LinkedLine";
 import FindNumber from "./components/FindNumber";
 import CardNameLinks from "./components/CardNameLinks";
+import fhLogo from "./images/fern-haus-site-logo.png";
 
 function App() {
 	const [size, setSize] = useState(3),
@@ -28,28 +30,48 @@ function App() {
 		[spread]
 	);
 
-	const sizeDropdownHandler = (e) => {
-		setSize(e.target.value);
-		setSpread(getRandomSpread(e.target.value));
+	const sizeDropdownHandler = (size) => {
+		setSize(size);
+		setSpread(getRandomSpread(size));
 		scrollRef.current = document.getElementById("spread-cards-container");
 	};
 
 	const getSizeDropdown = (size) => (
-		<select id="size" onChange={(е) => sizeDropdownHandler(е)}>
-			{new Array(size).fill(0).map((dummy, i) => (
-				<option key={`size-option-${i + 1}`}>{i + 1}</option>
-			))}
-		</select>
+		<>
+			<select id="size">
+				{new Array(size).fill(0).map((dummy, i) => (
+					<option key={`size-option-${i + 1}`}>{i + 1}</option>
+				))}
+			</select>
+			&nbsp;
+			<button
+				onClick={() =>
+					sizeDropdownHandler(+document.getElementById("size").value)
+				}
+			>
+				DRAW
+			</button>
+		</>
 	);
 
-	const cardsDropdownHandler = (e) => setSpread([e.target.value]);
+	const cardsDropdownHandler = (card) => setSpread([card]);
 
 	const getCardsDropdown = () => (
-		<select id="cards" onChange={(е) => cardsDropdownHandler(е)}>
-			{allCardNames.map((cardName) => (
-				<option key={`cards-option-${cardName}`}>{cardName}</option>
-			))}
-		</select>
+		<>
+			<select id="cards">
+				{allCardNames.map((cardName) => (
+					<option key={`cards-option-${cardName}`}>{cardName}</option>
+				))}
+			</select>
+			&nbsp;
+			<button
+				onClick={() =>
+					cardsDropdownHandler(document.getElementById("cards").value)
+				}
+			>
+				DRAW
+			</button>
+		</>
 	);
 
 	const cardWordLinkHandler = (cardWord) => {
@@ -103,22 +125,85 @@ function App() {
 
 	return (
 		<div className="App">
-			<h1>Tarotria</h1>
-			Spread Size: {getSizeDropdown(10)}
-			<h3 id="spread-cards-container">
-				<ul id="spread-cards">
+			<header>
+				<a
+					href="https://fern.haus/"
+					className="fern-haus-link"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<section className="fern-haus-info">
+						<img
+							src={fhLogo}
+							alt="Fern Haus Logo - House with Port Window and Fern Vines"
+						/>
+						<h4>fern.haus</h4>
+					</section>
+				</a>
+				<h1>Tarotria</h1>
+				<h2>Tarot and Gematria Combined</h2>
+				<div id="sub-header">
+					<h3>
+						Give your Tarot readings deeper meaning. Here you can
+						look up Gematria references for each word in your
+						spread.
+					</h3>
+					<h3>
+						Gematria is a complex esoteric practice within Kabbalah,
+						or Jewish Mysticism. It assigns a numeric value to each
+						Biblical Hebrew word based on the word's constituent
+						letters. Gematria is a great way to introduce both
+						Kabbalah and numerology into your Tarot practice.
+					</h3>
+					<p>
+						The Gematria dictionary is parsed from{" "}
+						<a
+							href="http://www.billheidrick.com/works/hgemat.htm"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Bill Heidrick's Gematria Website
+						</a>
+						. For a deeper dive into tarot, check out{" "}
+						<a
+							href="https://fern.haus/projects/tarot"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Fern Haus Tarot
+						</a>
+						.
+					</p>
+				</div>
+			</header>
+			<h3>Spread Size: {getSizeDropdown(10)}</h3>
+			<div id="spread-cards-container">
+				<div id="spread-cards">
 					{spread.map((card) => (
-						<li
+						<div
 							key={`spread-card-${card}`}
 							className="card-name-link"
 							onClick={() => cardNameLinkHandler(card)}
 						>
+							<img
+								src={`https://fern.haus/images/tarot/${card.replace(
+									" reversed",
+									""
+								)}.jpg`}
+								alt={card}
+								className={
+									card.includes(" reversed")
+										? "reversed"
+										: "upright"
+								}
+							/>
 							{card}
-						</li>
+						</div>
 					))}
-				</ul>
-			</h3>
-			Cards: {getCardsDropdown()}
+				</div>
+			</div>
+			<h3>Pick Single Card: {getCardsDropdown()}</h3>
+			<br />
 			{makeCardCompare({ spread })}
 			<hr />
 			<div id="find-word-container">
@@ -136,6 +221,22 @@ function App() {
 			<div id="find-number-container">
 				<FindNumber {...{ numbers, setNumbers, makeHebrewWordBoxes }} />
 			</div>
+			<footer>
+				<a
+					href="https://fern.haus/"
+					className="fern-haus-link"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<section className="fern-haus-info">
+						<img
+							src={fhLogo}
+							alt="Fern Haus Logo - House with Port Window and Fern Vines"
+						/>
+						<h4>fern.haus</h4>
+					</section>
+				</a>
+			</footer>
 		</div>
 	);
 }

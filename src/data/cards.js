@@ -1721,13 +1721,15 @@ updateCards();
 const allCardNames = Object.keys(cards);
 
 const getRandomSpread = (size) => {
-	const result = new Set();
-	while (result.size < size) {
-		result.add(
-			allCardNames[Math.floor(Math.random() * allCardNames.length)]
-		);
+	const result = [];
+	let next;
+	while (result.length < size) {
+		next = allCardNames[Math.floor(Math.random() * allCardNames.length)];
+		!result
+			.map((card) => card.replace(" reversed", ""))
+			.includes(next.replace(" reversed", "")) && result.push(next);
 	}
-	return [...result];
+	return result;
 };
 
 export default cards;
